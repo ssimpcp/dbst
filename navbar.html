@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+	<div class="navbar-header">
+	  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+	    <span class="icon-bar"></span>
+	    <span class="icon-bar"></span>
+	    <span class="icon-bar"></span>          
+	  </button>
+	  <a class="navbar-brand" href="index.php">DBST4</a>
+	</div>
+	<div class="collapse navbar-collapse" id="myNavbar">
+	  <ul class="nav navbar-nav navbar-right">
+	    <li class="dropdown">
+	      <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">ASSET
+	      <span class="caret"></span></a>
+	      <ul class="dropdown-menu dropdown-menu-left">
+		<li><a href="total.php">TOTAL</a></li>
+		<li class="divider"></li>
+		<li><a href="server.php">SERVER</a></li>
+		<li><a href="switch.php">SWITCH</a></li>
+		<li><a href="storage.php">STORAGE</a></li>
+		<li><a href="rack.php">RACK</a></li>
+	      </ul>
+	    </li>
+	    <li><a href="rack_info.php">RACK INFO</a></li>
+	    <li><a href="strg_info.php">STORAGE INFO</a></li>
+		<li>
+		<form action = "logout.php">
+			<label>관리자님</label>
+			<input type = "submit" value = "Logout" />
+		</form>
+		</li>
+	  </ul>
+	</div>
+      </div>
+    </nav>
+  </body>
+</html>
+
