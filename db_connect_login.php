@@ -1,21 +1,7 @@
 <?php
+	session_cache_expire(3);
+	session_cache_limiter('');
 	session_start();
-
-	$timeout=10;
-	if(isset($_SESSION['timeout'])){
-		$elapsed_time = time() - $_SESSION['start_time'];
-		if($elapsed_time >= $timeout){
-			session_destroy();
-			header("Location: login.php");
-		}
-	}
-	$_SESSION['start_time']=time();
-
-	if($_SESSION['token']==NULL){
-		echo "<meta http-equiv='refresh' content='0; url=login.php'>";
-		exit;
-	}
-	
   $dbid="sim";
   $dbpw="qwer1234";
   $dbname="DBST4";
@@ -27,5 +13,4 @@
     echo $e->getMessage();
   }
 ?>
-
 

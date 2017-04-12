@@ -6,9 +6,33 @@
   $item_mgmt_num;
   if($type == "SERVER"){
         $item_mgmt_num=$_POST['se_mgmt_num'];
+	$query = "SELECT location FROM rack WHERE mgmt_num = :mgmt_num";
+	$stmt = $conn->prepare($query);
+	$stmt->bindParam(":mgmt_num", $rack_mgmt_num);
+	$stmt->execute();
+	$result = $stmt->fetch(PDO::FETCH_NUM);
+	$location = $result[0];
+
+	$query = "UPDATE server SET location = :location WHERE mgmt_num = :mgmt_num";
+	$stmt = $conn->prepare($query);
+	$stmt->bindParam(":location", $location);
+	$stmt->bindParam(":mgmt_num", $item_mgmt_num);
+	$stmt->execute();	
   }
   else if($type == "SWITCH"){
         $item_mgmt_num=$_POST['sw_mgmt_num'];
+	$query = "SELECT location FROM rack WHERE mgmt_num = :mgmt_num";
+	$stmt = $conn->prepare($query);
+	$stmt->bindParam(":mgmt_num", $rack_mgmt_num);
+	$stmt->execute();
+	$result = $stmt->fetch(PDO::FETCH_NUM);
+	$location = $result[0];
+
+	$query = "UPDATE switch SET location = :location WHERE mgmt_num = :mgmt_num";
+	$stmt = $conn->prepare($query);
+	$stmt->bindParam(":location", $location);
+	$stmt->bindParam(":mgmt_num", $item_mgmt_num);
+	$stmt->execute();	
   }
   $index = $_POST['index'];
   $ip = $_POST['ip'];

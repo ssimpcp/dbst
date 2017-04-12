@@ -9,22 +9,22 @@
     $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_NUM);
     $last_index = $result[0];
-    echo ", ".$last_index;
     if(substr($last_index, 1, 2)==substr((string)date('Y'), 2, 2)){
       $int_index = (int)(substr($last_index,1,5));
+      $int_index = $int_index + 1;
       $mgmt_num = "S".$int_index;
     }else{
       $int_index = (int)(substr((string)date('Y'), 2, 2))*1000 + 1;
       $mgmt_num = "S".$int_index;
     }
-    $query = "INSERT INTO server (asset_num, mgmt_num, location, spec, core) VALUES (:asset_num, :mgmt_num, :location, :spec, :core)";
-
+    $query = "INSERT INTO server (asset_num, mgmt_num, location, spec, core, slot_size) VALUES (:asset_num, :mgmt_num, :location, :spec, :core, :slot_size)";
+    
     $asset_num = $_POST['asset_num_list'];
-    $location = $_POST['location'];
+    $location = "NOT ASSIGNED";
     $spec = $_POST['spec'];
     $assign_num = $_POST['assign_num'];
     $core = $_POST['core'];
-    $slot_size = $_POST['physical_size'];
+    $slot_size = $_POST['slot_size'];
     
     for($i = 0; $i < $assign_num; $i++) {
       $stmt = $conn->prepare($query);
@@ -33,11 +33,6 @@
       $stmt->bindParam(':location', $location);
       $stmt->bindParam(':spec', $spec);
       $stmt->bindParam(':core', $core);
-      $stmt->execute();
-      
-      $inside_query = "INSERT INTO rack_assign (mgmt_num, slot_size) VALUES (:mgmt_num, :slot_size)";
-      $stmt = $conn->prepare($inside_query);
-      $stmt->bindParam(':mgmt_num', $mgmt_num);
       $stmt->bindParam(':slot_size', $slot_size);
       $stmt->execute();
 
@@ -60,15 +55,16 @@
     
     if(substr($last_index, 1, 2)==substr((string)date('Y'), 2, 2)){
       $int_index = (int)(substr($last_index,1,5));
+      $int_index = $int_index + 1;
       $mgmt_num = "N".$int_index;
     }else{
       $int_index = (int)(substr((string)date('Y'), 2, 2))*1000 + 1;
       $mgmt_num = "N".$int_index;
     }
-    $query = "INSERT INTO switch (asset_num, mgmt_num, location, spec) VALUES (:asset_num, :mgmt_num, :location, :spec)";
+    $query = "INSERT INTO switch (asset_num, mgmt_num, location, spec, slot_size) VALUES (:asset_num, :mgmt_num, :location, :spec, :slot_size)";
 
     $asset_num = $_POST['asset_num_list'];
-    $location = $_POST['location'];
+    $location = "NOT ASSIGNED";
     $spec = $_POST['spec'];
     $assign_num = $_POST['assign_num'];
     $slot_size = $_POST['physical_size'];
@@ -79,11 +75,6 @@
       $stmt->bindParam(':mgmt_num', $mgmt_num);
       $stmt->bindParam(':location', $location);
       $stmt->bindParam(':spec', $spec);
-      $stmt->execute();
-
-      $inside_query = "INSERT INTO rack_assign (mgmt_num, slot_size) VALUES (:mgmt_num, :slot_size)";
-      $stmt = $conn->prepare($inside_query);
-      $stmt->bindParam(':mgmt_num', $mgmt_num);
       $stmt->bindParam(':slot_size', $slot_size);
       $stmt->execute();
 
@@ -106,6 +97,7 @@
     
     if(substr($last_index, 1, 2)==substr((string)date('Y'), 2, 2)){
       $int_index = (int)(substr($last_index,1,5));
+      $int_index = $int_index + 1;
       $mgmt_num = "D".$int_index;
     }else{
       $int_index = (int)(substr((string)date('Y'), 2, 2))*1000 + 1;
@@ -151,6 +143,7 @@
     
     if(substr($last_index, 1, 2)==substr((string)date('Y'), 2, 2)){
       $int_index = (int)(substr($last_index,1,5));
+      $int_index = $int_index + 1;
       $mgmt_num = "R".$int_index;
     }else{
       $int_index = (int)(substr((string)date('Y'), 2, 2))*1000 + 1;

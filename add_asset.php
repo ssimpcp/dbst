@@ -73,20 +73,20 @@ u
                     <td colspan="2"><input class="form-control" type="text" name="service_life" required=""></td>
                   </tr>
   		  <tr>
-                    <th>S</th>
+                    <th>서버</th>
                     <td colspan="2"><input class="form-control" type="text" name="s" required=""></td>
  		  </tr>
                   <tr>
                     </tr><tr>
-                    <th>N</th>
+                    <th>스위치</th>
                     <td colspan="2"><input class="form-control" type="text" name="n" required=""></td>
  		  </tr>
   		  <tr>
-                    <th>D</th>
+                    <th>스토리지</th>
                     <td colspan="2"><input class="form-control" type="text" name="d" required=""></td>
  		  </tr>
   		  <tr>
-                    <th>R</th>
+                    <th>랙</th>
                     <td colspan="2"><input class="form-control" type="text" name="r" required=""></td>
  		  </tr>
                     <tr><td align="right" colspan="3"><input type="submit" class="btn btn-default submit form-control" name="submit" value="등록"></td>

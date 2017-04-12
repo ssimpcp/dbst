@@ -23,16 +23,18 @@
     
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+      
         <div class="jumbotron text-center col-md-12 col-sm-12 col-xs-12">
                 <h1>Database Team Project</h1>
         </div>
+		
 		<div w3-include-html="navbar.html"></div>
 			<script>
 				w3IncludeHTML();
 			</script>
 	
         <div id="about" class="container-name col-md-12 col-sm-12 col-xs-12">
-                <h1>SERVICE RESOURCES<script> currentDate();</script></h1><br>
+                <h1>SERVICE RESOURCES <script> currentDate();</script></h1><br>
         </div>
 	<div class="add-button-right">
 	  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#CreateService" href="service_detail.php">Register</button>
@@ -196,4 +198,5 @@ function deleteConfirm(x){
 </script>
 </body>
 </html>
+
 

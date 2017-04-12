@@ -49,6 +49,7 @@
         $stmt->execute();
         print "<meta http-equiv='refresh' content='0;url=total.php'>";
       }
+
     }else if($category=='server'){
       $mgmt_num = $_REQUEST['mgmt_num'];
       $query = "SELECT count(*) FROM rack_info WHERE mgmt_num = :mgmt_num";
@@ -65,6 +66,8 @@
         $stmt = $conn->prepare($query);
         $stmt->bindParam(':mgmt_num', $mgmt_num);
         $stmt->execute();
+
+	
 
         $query = "UPDATE total_asset SET s = s - 1 WHERE asset_num = :asset_num";
         $stmt = $conn->prepare($query);
@@ -148,6 +151,11 @@
       $query = "DELETE FROM rack_info WHERE mgmt_num = :mgmt_num";
       $stmt = $conn->prepare($query);
       $stmt->bindParam(":mgmt_num", $_REQUEST['mgmt_num']);
+      $stmt->execute();
+
+      $query = "UPDATE server SET location = 'NOT ASSIGNED' WHERE mgmt_num =:mgmt_num";
+      $stmt = $conn->prepare($query);
+      $stmt->bindParam(':mgmt_num',$_REQUEST['mgmt_num']);
       $stmt->execute();
       print "<meta http-equiv='refresh' content='0;url=rack_info.php'>";
     }

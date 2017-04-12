@@ -64,10 +64,6 @@
                     </td>
                   </tr>
                   <tr>
-                    <th>현재위치</th>
-                    <td colspan="2"><input class="form-control" type="text" name="location" required=""></td>
-                  </tr>
-                  <tr>
                     <th>관리스펙</th>
                     <td colspan="2"><input class="form-control" type="text" name="spec" required=""></td>                    
                   </tr>
@@ -77,7 +73,7 @@
                   </tr>
 		  <tr>
 		    <th>사이즈</th>
-		    <td colspan="2"><input class="form-control"  type="text" name="physical_size" required=""></td>
+		    <td colspan="2"><input class="form-control"  type="text" name="slot_size" required=""></td>
 		  </tr>
 			<input type="hidden" name="category" value="server">
 <tr><td align="right" colspan="3"><input type="submit" class="btn btn-default submit form-control" name="submit" value="등록"></td>

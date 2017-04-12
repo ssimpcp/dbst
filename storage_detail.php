@@ -66,8 +66,19 @@
                     </td>
                   </tr>
                   <tr>
-                    <th>현재위치</th>
-                    <td colspan="2"><input  class="form-control"   type="text" name="location" required=""></td>
+                    <th>위치</th>
+                    <td colspan="2">
+		      <select class="form-control" id="location" name="type">
+		        <?php
+			$query = "SELECT room FROM location";
+			$stmt = $conn->prepare($query);
+			$stmt->execute();
+			while($result = $stmt->fetch(PDO::FETCH_NUM)){
+			  print "<option>".$result[0]."</option>";
+			}
+			?>
+		      </select>
+		    </td>
                   </tr>
                   <tr>
                     <th>관리스펙</th>
@@ -88,9 +99,6 @@
 			<input type="hidden" name="category" value="storage">
 <tr><td align="right" colspan="3"><input type="submit" class="btn btn-default submit form-control" name="submit" value="등록"></td>
                   </tr>
-  
-  
-                    
                  </tbody></table>
                </form>
 		</fieldset>

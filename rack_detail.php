@@ -64,8 +64,19 @@
 		    </td>
                   </tr>
                   <tr>
-                    <th>현재위치</th>
-                    <td colspan="2"><input class="form-control" type="text" name="location" required=""></td>
+                    <th>위치</th>
+                    <td colspan="2">
+		      <select class="form-control" class="form-contorl" name="location" required="">
+		        <?php
+			  $query = "SELECT room FROM location";
+			  $stmt = $conn->prepare($query);
+			  $stmt->execute();
+			  while($result = $stmt->fetch(PDO::FETCH_NUM)){
+			    print "<option>".$result[0]."</option>";
+			  }
+			?>
+		      </select>
+		    </td>
                   </tr>
                   <tr>
                     <th>관리스펙</th>

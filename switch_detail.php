@@ -62,10 +62,6 @@
 			</td>
 	          </tr>
                   <tr>
-                    <th>현재위치</th>
-                    <td colspan="2"><input class="form-control"  type="text" name="location" required=""></td>
-                  </tr>
-                  <tr>
                     <th>관리스펙</th>
                     <td colspan="2"><input  class="form-control"  type="text" name="spec" required=""></td>
                   </tr>

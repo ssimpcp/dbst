@@ -1,5 +1,5 @@
 <?php
-	require_once('db_connect.php');	
+	require_once('db_connect_login.php');	
 
 	session_cache_limiter('');
 	session_start();
@@ -17,7 +17,6 @@
 	
 	//if ID exist,
 	if($getID[0]) {
-
 		// if ID and PW are correct,
 		if($pw == $getID[1]) {
 			$key = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789^/';
@@ -31,23 +30,18 @@
 			$stmt->bindParam(':id', $id);
 			$stmt->execute();
 
-			// save the token in session
+			// save the id and token in session
+			$_SESSION['id'] = $id;
 			$_SESSION['token'] = $token;
-			header('Location: ./home.php');
+			header('Location: ./index.php');
 		}
 		else {
-			echo("
-				<script> window.alert('Password error.') </script> ");
-			header('Location: ./login.php');
+			echo "<script>window.alert(\"잘못된 비밀번호를 입력하였습니다.\"); location.href=\"login.php\";</script>";
 		}
 	}
 	else {
-		echo("
-			<script> window.alert('ID isn't registered or exist.') </script> ");
-		header('Location: ./login.php');
+		echo "<script type=\"text/javascript\"> window.alert(\"등록되지 않은 ID입니다.\");location.href=\"login.php\";</script>";
 	}
+	
 ?>
-
-
-
 

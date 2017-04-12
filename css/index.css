@@ -308,4 +308,10 @@ fieldset input{
   text-align: left;
   vertical-align: middle;
 }
-
+.btn.btn-primary.btn-lg.star_button{
+	padding: 0px 0px 0px 0px!important;
+	font-size: 13px; !important;
+	text-align: center; !important;
+	display:inline-block; !important;
+	margin-top: 5px; !important;
+}

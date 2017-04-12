@@ -51,11 +51,32 @@
 	</thead>
 	<tbody>
 	<?php
-          $query = "SELECT asset.asset_num, reg_date,  asset_name, standard, price, assembler, service_life, s, n, d, r  FROM asset, total_asset where asset.asset_num = total_asset.asset_num";
+	  if(!$_REQUEST['page']) $page = 1;
+	  else $page = $_REQUEST['page'];
+	  
+	  $page_list = 30;
+	  $block_set = 10;
+	  
+	  $query = "SELECT count(*) FROM asset";
+	  $stmt = $conn->prepare($query);
+	  $stmt->execute();
+	  $result = $stmt->fetch(PDO::FETCH_NUM);
+	  $total = $result[0];
+	  
+	  $total_page = ceil($total/$page_list);
+	  $total_block = ceil($total_page/$block_set);
+	  
+	  $block = ceil($page/$block_set);
+	  
+	  $limit_idx = ($page-1)*$page_list;
+	   
+          $query = "SELECT asset.asset_num, reg_date,  asset_name, standard, price, assembler, service_life, s, n, d, r  FROM asset, total_asset where asset.asset_num = total_asset.asset_num LIMIT $limit_idx, $page_list";
           $stmt = $conn->prepare($query);
           $stmt->execute();
           $today = date("Y-m-d");
-	  while( $result = $stmt->fetch(PDO::FETCH_NUM) ) {
+	  $result = $stmt->fetch(PDO::FETCH_NUM);
+	  while( $count < $page_list ) {
+	   if($result[0] == NULL) break;
       	   $end = date("Y-m-d",strtotime($result[1]."+$result[6]year"));
 	    if(strtotime($today) > strtotime($end)) {
 	    	print '<tr class="danger"><td>';
@@ -87,10 +108,33 @@
             print '</td><td>';
               print '<a type="button" class="btn btn-default" href="del_asset.php?category=total&asset_num='.$result[0].'">delete</a>';
             print '</td></tr>';
+	    $result = $stmt->fetch(PDO::FETCH_NUM);
+	    $count++;
           }
+	  $first_page = (($block-1)*$block_set)+1;
+	  $last_page = min($total_page, $block*$block_set);
+	  $prev_page = $page-1;
+	  $next_page = $page+1;
+	  $prev_block = $block-1;
+	  $next_block = $block+1;
+	  $prev_block_page = $prev_block*$block_set;
+	  $next_block_page = $next_block*$block_set-($block_set-1);
+
+	  $parameter = $page-1;
         ?>
 	</tbody>
       </table>
+      <div><ul class="pagination">
+      <?php
+        echo ($page >= 2) ? "<li><a href=$_SERVER[PHP_SLEF]?page=$parameter>prev </a></li>" : "";
+	for($i=$first_page;$i<=$last_page;$i++){
+	  if($page == $i) print "<li><a href=$_SERVER[PHP_SELF]?page=$i> <U>$i</U> </a></li>";
+	  else print "<li><a href=$_SERVER[PHP_SELF]?page=$i> $i </a></li>";
+	}
+	$parameter = $page+1;
+	echo ($page*$page_list >= $total ) ? "" : "<li><a href=$_SERVER[PHP_SLEF]?page=$parameter>next</a></li>";
+      ?>
+      </ul></div>
     </div>
   </body>
 </html>

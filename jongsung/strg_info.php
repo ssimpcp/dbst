@@ -1,5 +1,5 @@
 <?php
-  require_once('db_connect.php');
+  require_once('../db_connect.php');
   $query = "SELECT type, sum(aloc) FROM storage as A, storage_info as B WHERE A.mgmt_num=B.mgmt_num GROUP BY type";
   $stmt = $conn->prepare($query);
   $stmt->execute();
