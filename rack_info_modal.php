@@ -109,9 +109,9 @@
 	                        </div>
 	                        <div class="form-group">
 	                                <label class="control-label" for="usage">IP</label>
-	                                <input type="text" id="ip_input" name="ip" class="form-control" onfocusout="checkIP()" required=""></input>
+	                                <input type="text" id="ip_input" name="ip" class="form-control" onfocusout="checkIP()"required=""></input>
 	                        </div>
-				<input id="submit_button" style="display:none"  type="submit" class="btn btn-default" name="submit" value="assign"></input>
+				<input id="submit_button" style="display:none" type="submit" class="btn btn-default" name="submit" value="assign"></input>
 			</form>
 
 	                        
@@ -179,9 +179,23 @@ function getRackSpec(){
         xmlhttp.send("item_mgmt_num="+rack_mgmt_num);
 
 }
+$(function(){
+	$(window).keydown(function(event){
+		if(event.keyCode==13){
+			event.preventDefault();
+			return false;
+		}
+	});
+});
 
 function submitProp(){
-	document.getElementById("submit_button").click();
+	if(window.event.keycode==13){
+		event.preventDefault();
+		return false;
+	}
+	else	{
+		document.getElementById("submit_button").click();
+	}
 }
 
 xmlhttp.onreadystatechange=function(){
@@ -245,15 +259,14 @@ function setIndex(){
 function checkIP(){
         var x = document.getElementById("ip_input");
         var re = new RegExp(/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/)
-                if(!re.test(x.value)){
-                        window.alert("IP형식을 맞춰주세요. xxx.xxx.xxx.xxx");
-                        x.value = "";
+                if(!re.test(x.value)&&re){
+			x.value="";
                         $(this).unbind('focus');
+                        window.alert("IP형식을 맞춰주세요. xxx.xxx.xxx.xxx");
                 }
 
 }
-function trim(str) 
-{ 
+function trim(str){ 
   return str.replace(/(^\s*)|(\s*$)/gi, ""); 
 }
 </script>

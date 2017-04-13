@@ -16,11 +16,10 @@ require_once("db_connect.php");
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_NUM);
         $i = $result[0];
-
         $boolArray = array(1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1);
         $query = "SELECT ind, slot_size from rack_info where rack_mgmt_num = :rack_mgmt_num ORDER BY ind DESC";
         $stmt = $conn->prepare($query);
-        $stmt->bindValue(':rack_mgmt_num', $rack_mgmt_num);
+        $stmt->bindParam(':rack_mgmt_num', $rack_mgmt_num);
         $stmt->execute();
         $index=0;
         for($j=0;$j<$i;$j++){
@@ -32,13 +31,13 @@ require_once("db_connect.php");
                 }
         }
         $result="";
-        for($n=0;$n<(42-($slot_size));$n++){
+        for($n=0;$n<(43-($slot_size));$n++){
                 $temp=0;
                 for($l=0;$l<$slot_size;$l++){
-                        $temp = $boolArray[$n]+$temp;
+                        $temp = $boolArray[$n+$l]+$temp;
                 }
                 if($temp == $slot_size){
-                       $result .= "<option>".($n+1)."</option>";
+                      $result .= "<option>".($n+1)."</option>";
                 }
         }
         echo $result;
